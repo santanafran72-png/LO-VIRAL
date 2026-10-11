@@ -1,46 +1,38 @@
-<section class="hero page-width">
-  <div class="hero-copy">
-    <p class="eyebrow">LO DESCUBRISTE. LO QUIERES.</p>
-    <h1>Lo viral,<br><span>está aquí.</span></h1>
-    <p class="hero-description">Productos ingeniosos, novedades y favoritos de internet, seleccionados para tu día a día.</p>
-    <a class="button" href="{{ routes.all_products_collection_url }}">Explorar productos</a>
-  </div>
-  <div class="hero-art" aria-hidden="true"><span>LV</span><i>✦</i><b>WOW!</b></div>
-</section>
-<section class="page-width">
-  <div class="section-heading">
-    <p class="eyebrow">ENCUENTRA LO TUYO</p>
-    <h2>Compra por categoría</h2>
-  </div>
-
-  <div class="product-grid">
-    {% for collection in collections %}
-      {% if collection.title == 'Gorras' or collection.title == 'Zapatillas' or collection.title == 'Bolsos' or collection.title == 'Bolsos y mochilas' %}
-        <a class="product-card" href="{{ collection.url }}">
-          <h3>{{ collection.title | escape }}</h3>
-          <p>Ver productos →</p>
-        </a>
-      {% endif %}
-    {% endfor %}
-  </div>
-</section>
-
-<section class="featured page-width">
-  <div class="section-heading"><p class="eyebrow">DESCUBRE ALGO NUEVO</p><h2>Favoritos virales</h2></div>
-  {% if collections.all.products.size > 0 %}
-    <div class="product-grid">
-      {% for product in collections.all.products limit: 8 %}
-        <a class="product-card" href="{{ product.url }}">
-          {% if product.featured_image %}{{ product.featured_image | image_url: width: 700 | image_tag: loading: 'lazy', alt: product.title }}{% else %}<div class="product-placeholder">LO VIRAL</div>{% endif %}
-          <h3>{{ product.title | escape }}</h3>
-          <p>{{ product.price | money }}</p>
-        </a>
-      {% endfor %}
+<header class="site-header">
+  {% if settings.announcement_text != blank %}
+    <div class="announcement">
+      {{ settings.announcement_text | escape }}
     </div>
-  {% else %}
-    <div class="empty-state"><span>✦</span><h3>Se vienen cosas buenas.</h3><p>Agrega tus primeros productos desde el administrador de Shopify y aparecerán aquí.</p></div>
   {% endif %}
-</section>
+
+  <div class="header-inner page-width">
+    <a class="brand" href="{{ routes.root_url }}">
+      {{ shop.name | default: 'Lo Viral' | escape }}
+    </a>
+
+    <nav class="main-nav" aria-label="Principal">
+      <a href="{{ routes.root_url }}">Inicio</a>
+
+      <a href="{{ routes.all_products_collection_url }}">
+        Productos
+      </a>
+
+      {% for collection in collections %}
+        {% if collection.title == 'Gorras' or collection.title == 'Zapatillas' or collection.title == 'Bolsos' or collection.title == 'Bolsos y mochilas' %}
+          <a href="{{ collection.url }}">
+            {{ collection.title | escape }}
+          </a>
+        {% endif %}
+      {% endfor %}
+
+      <a href="{{ routes.cart_url }}">Carrito</a>
+    </nav>
+  </div>
+</header>
+
 {% schema %}
-{"name":"Portada Lo Viral","settings":[]}
+{
+  "name": "Encabezado",
+  "settings": []
+}
 {% endschema %}
