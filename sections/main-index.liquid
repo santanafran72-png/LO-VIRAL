@@ -1,0 +1,28 @@
+<section class="hero page-width">
+  <div class="hero-copy">
+    <p class="eyebrow">LO DESCUBRISTE. LO QUIERES.</p>
+    <h1>Lo viral,<br><span>está aquí.</span></h1>
+    <p class="hero-description">Productos ingeniosos, novedades y favoritos de internet, seleccionados para tu día a día.</p>
+    <a class="button" href="{{ routes.all_products_collection_url }}">Explorar productos</a>
+  </div>
+  <div class="hero-art" aria-hidden="true"><span>LV</span><i>✦</i><b>WOW!</b></div>
+</section>
+<section class="featured page-width">
+  <div class="section-heading"><p class="eyebrow">DESCUBRE ALGO NUEVO</p><h2>Favoritos virales</h2></div>
+  {% if collections.all.products.size > 0 %}
+    <div class="product-grid">
+      {% for product in collections.all.products limit: 8 %}
+        <a class="product-card" href="{{ product.url }}">
+          {% if product.featured_image %}{{ product.featured_image | image_url: width: 700 | image_tag: loading: 'lazy', alt: product.title }}{% else %}<div class="product-placeholder">LO VIRAL</div>{% endif %}
+          <h3>{{ product.title | escape }}</h3>
+          <p>{{ product.price | money }}</p>
+        </a>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="empty-state"><span>✦</span><h3>Se vienen cosas buenas.</h3><p>Agrega tus primeros productos desde el administrador de Shopify y aparecerán aquí.</p></div>
+  {% endif %}
+</section>
+{% schema %}
+{"name":"Portada Lo Viral","settings":[]}
+{% endschema %}
