@@ -1,0 +1,19 @@
+[
+  {
+    "name": "Lo Viral",
+    "settings": [
+      {
+        "type": "text",
+        "id": "announcement_text",
+        "label": "Texto de anuncio",
+        "default": "Productos virales que sí quieres tener"
+      },
+      {
+        "type": "color",
+        "id": "accent_color",
+        "label": "Color de acento",
+        "default": "#ff2d8d"
+      }
+    ]
+  }
+]
