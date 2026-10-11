@@ -1,0 +1,10 @@
+<section class="page-width collection-page">
+  <p class="eyebrow">DESCUBRE ALGO NUEVO</p><h1>{{ collection.title | escape }}</h1>
+  {% if collection.description != blank %}<div class="description">{{ collection.description }}</div>{% endif %}
+  <div class="product-grid">{% for product in collection.products %}
+    <a class="product-card" href="{{ product.url }}">{% if product.featured_image %}{{ product.featured_image | image_url: width: 700 | image_tag: loading: 'lazy', alt: product.title }}{% endif %}<h3>{{ product.title | escape }}</h3><p>{{ product.price | money }}</p></a>
+  {% else %}<p>Pronto encontrarás productos aquí.</p>{% endfor %}</div>
+</section>
+{% schema %}
+{"name":"Colección principal","settings":[]}
+{% endschema %}
