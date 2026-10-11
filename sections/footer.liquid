@@ -1,0 +1,10 @@
+<footer class="site-footer">
+  <div class="page-width footer-inner">
+    <strong>{{ shop.name | default: 'Lo Viral' | escape }}</strong>
+    <p>Descubre tus próximos favoritos.</p>
+    <small>© {{ 'now' | date: '%Y' }} {{ shop.name | escape }}. Todos los derechos reservados.</small>
+  </div>
+</footer>
+{% schema %}
+{"name":"Pie de página","settings":[]}
+{% endschema %}
