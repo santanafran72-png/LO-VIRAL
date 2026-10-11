@@ -1,0 +1,14 @@
+<header class="site-header">
+  {% if settings.announcement_text != blank %}<div class="announcement">{{ settings.announcement_text | escape }}</div>{% endif %}
+  <div class="header-inner page-width">
+    <a class="brand" href="{{ routes.root_url }}">{{ shop.name | default: 'Lo Viral' | escape }}</a>
+    <nav class="main-nav" aria-label="Principal">
+      <a href="{{ routes.root_url }}">Inicio</a>
+      <a href="{{ routes.all_products_collection_url }}">Productos</a>
+      <a href="{{ routes.cart_url }}">Carrito</a>
+    </nav>
+  </div>
+</header>
+{% schema %}
+{"name":"Encabezado","settings":[]}
+{% endschema %}
