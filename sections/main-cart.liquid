@@ -1,0 +1,14 @@
+<section class="page-width cart-page"><p class="eyebrow">TU SELECCIÓN</p><h1>Tu carrito</h1>
+{% if cart.item_count > 0 %}
+  <form action="{{ routes.cart_url }}" method="post">
+    {% for item in cart.items %}
+      <div class="cart-line"><div>{% if item.image %}{{ item.image | image_url: width: 180 | image_tag: alt: item.title }}{% endif %}</div><div><a href="{{ item.url }}">{{ item.product.title | escape }}</a><p>{{ item.final_price | money }}</p><label for="updates_{{ item.key }}">Cantidad</label><input id="updates_{{ item.key }}" type="number" name="updates[]" value="{{ item.quantity }}" min="0"></div></div>
+    {% endfor %}
+    <button class="button button-secondary" type="submit" name="update">Actualizar carrito</button>
+    <p class="price">Total: {{ cart.total_price | money }}</p><button class="button" type="submit" name="checkout">Finalizar compra</button>
+  </form>
+{% else %}<div class="empty-state"><h3>Tu carrito está esperando algo viral.</h3><a class="button" href="{{ routes.all_products_collection_url }}">Ver productos</a></div>{% endif %}
+</section>
+{% schema %}
+{"name":"Carrito principal","settings":[]}
+{% endschema %}
